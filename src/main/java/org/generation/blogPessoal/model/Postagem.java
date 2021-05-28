@@ -6,10 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.validation.constraints.NotNull;
 
 
@@ -36,6 +40,12 @@ public class Postagem {
 	private Date Date = new java.sql.Date(System.currentTimeMillis()); /* Assim que passar algum dado por essa classe, vai capturar
 	extamente a data, hora, segundo, milesimo que esse dado passou pela classe */
 	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Tema tema;
+	
+	
+
 	//Getters e Setters
 	public long getId() {
 		return id;
@@ -60,6 +70,13 @@ public class Postagem {
 	}
 	public void setDate(Date date) {
 		Date = date;
+	}
+	
+	public Tema getTema() {
+		return tema;
+	}
+	public void setTema(Tema tema) {
+		this.tema = tema;
 	}
 	
 }
